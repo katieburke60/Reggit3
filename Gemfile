@@ -9,8 +9,10 @@ gem 'bcrypt', '~> 3.1.7'
 # To use Jbuilder templates for JSON
 gem 'jbuilder'
 
-gem "react_on_rails", "~> 6"
-gem 'federal_register', '~> 0.6.0'
+gem 'rest-client'
+
+# gem "react_on_rails", "~> 6"
+# gem 'federal_register', '~> 0.6.0'
 
 gem 'listen', '~> 3.0' #NOTE: for TCP functionality, use '~> 2.10' for now
 

@@ -1,16 +1,4 @@
 
-citizens = Citizen.create([
-     {account_id: 1,name: 'Luke', location:'NJ', age:28, gender:'m'},
-     {account_id:2,name: 'Laia', location:'NY', age:38, gender:'f'},
-     {account_id:3,name: 'Lisa', location:'MD', age:18, gender:'f'},
-     {account_id:4,name: 'Chewie', location:'ND', age:25, gender:'m'},
-     {account_id:5,name: 'Marge', location:'MO', age:35, gender:'f'},
-     {account_id:6,name: 'Frank', location:'NY', age:28, gender:'m'},
-     {account_id:7,name: 'Homer', location:'CA', age:42, gender:'m'},
-     {account_id:8,name: 'Scott', location:'TX', age:20, gender:'m'},
-     {account_id:9,name: 'Bart', location:'CO', age:18, gender:'m'},
-     {account_id:10,name: 'Moe', location:'MN', age:28, gender:'m'}
-     ])
 
 comments = Comment.create([
   { description: 'comment comment comment comment', user_id: 1, regulation_id: 1 },
@@ -53,6 +41,19 @@ comments = Comment.create([
   {email: 'email9@sample.com', password: 'password', password_confirmation: 'password'},
   {email: 'email0@sample.com', password: 'password', password_confirmation: 'password'}
   ])
+
+  citizens = Citizen.create([
+       {account_id: 1,name: 'Luke', location:'NJ', age:28, gender:'m'},
+       {account_id:2,name: 'Laia', location:'NY', age:38, gender:'f'},
+       {account_id:3,name: 'Lisa', location:'MD', age:18, gender:'f'},
+       {account_id:4,name: 'Chewie', location:'ND', age:25, gender:'m'},
+       {account_id:5,name: 'Marge', location:'MO', age:35, gender:'f'},
+       {account_id:6,name: 'Frank', location:'NY', age:28, gender:'m'},
+       {account_id:7,name: 'Homer', location:'CA', age:42, gender:'m'},
+       {account_id:8,name: 'Scott', location:'TX', age:20, gender:'m'},
+       {account_id:9,name: 'Bart', location:'CO', age:18, gender:'m'},
+       {account_id:10,name: 'Moe', location:'MN', age:28, gender:'m'}
+       ])
 
  votes = Vote.create([
    {vote: "up",user_id:1,regulation_id:3},
