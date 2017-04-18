@@ -16,4 +16,5 @@ Rails.application.routes.draw do
    resources :comments, only: [:index,:show,:create]
    resources :sessions, only: [:create]
  end
+
 end
