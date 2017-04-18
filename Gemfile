@@ -10,6 +10,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jbuilder'
 
 gem 'rest-client'
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'responders'
+gem 'rails_rest_vote'
 
 # gem "react_on_rails", "~> 6"
 # gem 'federal_register', '~> 0.6.0'
