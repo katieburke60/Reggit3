@@ -42,6 +42,10 @@ comments = Comment.create([
   {email: 'email0@sample.com', password: 'password', password_confirmation: 'password'}
   ])
 
+  regulations = Regulation.create([
+    { major_rule: true, title: 'water regulation' }
+    ])
+
   citizens = Citizen.create([
        {account_id: 1,name: 'Luke', location:'NJ', age:28, gender:'m'},
        {account_id:2,name: 'Laia', location:'NY', age:38, gender:'f'},

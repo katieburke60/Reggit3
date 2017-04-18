@@ -22,8 +22,10 @@ class RegulationsController < ApplicationController
 
  def show
    regulation = Regulation.find(params[:id])
+   @comments = regulation.comments
    #API call for specific regulation (by certain ID)
-   render json: regulation, serializer: RegulationShowSerializer
+  #  render json: regulation, serializer: RegulationShowSerializer
+   render json: @comments
  end
 
 end
