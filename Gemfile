@@ -11,6 +11,8 @@ gem 'jbuilder'
 
 gem 'rest-client'
 
+gem 'active_model_serializers', '~> 0.10'
+
 # gem "react_on_rails", "~> 6"
 # gem 'federal_register', '~> 0.6.0'
 
