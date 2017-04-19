@@ -81,15 +81,18 @@ comments = Comment.create([
    {vote: "up",user_id:19,regulation_id:2}
 ])
 
-  # categories = Category.create({
-  #     z = Category.create({ name: 'food'})
-  #     y = Category.create({ name: 'bar'})
-  #     x = Category.create({ name: 'service'})
-  #     w = Category.create({ name: 'outside'})
-  #     v = Category.create({ name: 'music'})
-  #     u = Category.create({ name: 'obscure'})
-  #     t = Category.create({ name: 'family-friendly'})
-  #     s = Category.create({ name: 'adults-only'})
-  #     r = Category.create({ name: 'theater'})
-  #     q = Category.create({ name: 'cerebral'})
-  #   })
+  categories = Category.create([
+      { name: 'education'},
+      { name: 'health'},
+      { name: 'transportation'},
+      { name: 'jobs_and_economy'},
+      { name: 'labor'},
+      { name: 'national_security'},
+      { name: 'energy_and_environment'},
+      { name: 'veterans'},
+      { name: 'finance'},
+      { name: 'housing_and_urban_development'},
+      { name: 'foreign_policy'},
+      { name: 'law_and_justice'},
+      { name: 'technology'},
+    ])

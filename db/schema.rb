@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418145519) do
+ActiveRecord::Schema.define(version: 20170419154532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,13 +60,15 @@ ActiveRecord::Schema.define(version: 20170418145519) do
     t.boolean  "major_rule"
     t.string   "title"
     t.string   "summary"
-    t.string   "type"
+    t.string   "reg_status"
     t.string   "url"
     t.integer  "document_number"
     t.string   "publication_date"
     t.integer  "federal_register_id"
+    t.string   "category_name"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "agency_id"
   end
 
   create_table "votes", force: :cascade do |t|
