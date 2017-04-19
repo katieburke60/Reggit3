@@ -13,12 +13,12 @@ gem 'rest-client'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'responders'
 gem 'rails_rest_vote'
-
+gem 'jwt'
 # gem "react_on_rails", "~> 6"
 # gem 'federal_register', '~> 0.6.0'
 
 gem 'listen', '~> 3.0' #NOTE: for TCP functionality, use '~> 2.10' for now
-
+gem 'pry-rails'
 # Use unicorn as the app server
 # gem 'unicorn'
 
