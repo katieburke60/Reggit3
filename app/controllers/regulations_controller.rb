@@ -1,5 +1,7 @@
+
 require 'rest-client'
 require 'pry'
+
 
 class RegulationsController < ApplicationController
   @@cat_to_agency_id = {
@@ -45,6 +47,7 @@ class RegulationsController < ApplicationController
     regulations_list_data = JSON.parse(RestClient.get(dynamic_date_url),headers={})
     regulations_list_v1 = regulations_list_data['results']
 
+
     final_regulations_list = regulations_list_v1.map do |regulation|
       found_category = ''
       @@cat_to_agency_id.each do |category, agencies|
@@ -61,6 +64,7 @@ class RegulationsController < ApplicationController
     end
     render json: final_regulations_list.to_json
   end
+
 
 
 # def show
