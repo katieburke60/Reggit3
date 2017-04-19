@@ -45,6 +45,7 @@ GEM
     arel (7.1.4)
     bcrypt (3.1.11)
     builder (3.2.3)
+    coderay (1.1.1)
     concurrent-ruby (1.0.5)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
@@ -78,6 +79,12 @@ GEM
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
     pg (0.20.0)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-nav (0.2.4)
+      pry (>= 0.9.10, < 0.11.0)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -113,6 +120,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     ruby_dep (1.5.0)
+    slop (3.6.0)
     spring (2.0.1)
       activesupport (>= 4.2)
     sprockets (3.7.1)
@@ -142,6 +150,7 @@ DEPENDENCIES
   jbuilder
   listen (~> 3.0)
   pg
+  pry-nav
   rails (~> 5.0.2)
   rest-client
   spring
