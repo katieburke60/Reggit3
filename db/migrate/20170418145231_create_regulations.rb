@@ -11,6 +11,7 @@ class CreateRegulations < ActiveRecord::Migration[5.0]
       t.integer :document_number
       t.string :publication_date
       t.integer :federal_register_id
+      t.string :category_name
 
       t.timestamps
     end
