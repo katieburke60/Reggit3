@@ -46,8 +46,7 @@ class RegulationsController < ApplicationController
     regulations_list_data = JSON.parse(RestClient.get(dynamic_date_url),headers={})
     regulations_list_v1 = regulations_list_data['results']
 
-    final_regulations_list = regulations_list_v1.map do |regulation|
-      found_category = ''
+    @final_regulations_list = regulations_list_v1.map do |regulation|
       @@cat_to_agency_id.each do |category, agencies|
         if agencies.include?(regulation['agencies'][0]['id'])
           @found_category = category
@@ -56,13 +55,18 @@ class RegulationsController < ApplicationController
 
       category_id = (Category.where(["name= ?", @found_category]).first).id
 
-      Regulation.create(title: regulation['title'], agency: regulation['agencies'][0]['name'], reg_status: regulation['type'],
-                        document_number: regulation['document_number'], url: regulation['html_url'],
-                        publication_date: regulation['publication_date'], agency_id: regulation['agencies'][0]['id'],
-                        summary: regulation['abstract'], major_rule: true, category_name: @found_category, category_id: category_id)
-    end
-    render json: final_regulations_list.to_json
+      current_regulation = Regulation.find_by title: regulation['title']
+      if current_regulation
+        current_regulation
+      else
+        Regulation.create(title: regulation['title'], agency: regulation['agencies'][0]['name'], reg_status: regulation['type'],
+                          document_number: regulation['document_number'], url: regulation['html_url'],
+                          publication_date: regulation['publication_date'], agency_id: regulation['agencies'][0]['id'],
+                          summary: regulation['abstract'], major_rule: true, category_name: @found_category, category_id: category_id)
+      end
   end
+  render json: @final_regulations_list.to_json
+end
 
   def show
       regulation = Regulation.find(params[:id])

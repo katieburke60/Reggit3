@@ -1,4 +1,6 @@
 class Regulation < ApplicationRecord
+  validates :url, :presence => true, :uniqueness => true
+
   has_many :comments
   has_many :votes
   has_many :followers
