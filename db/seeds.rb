@@ -42,10 +42,6 @@ comments = Comment.create([
   {email: 'email0@sample.com', password: 'password', password_confirmation: 'password'}
   ])
 
-  regulations = Regulation.create([
-    { major_rule: true, title: 'water regulation' }
-    ])
-
   citizens = Citizen.create([
        {account_id: 1,name: 'Luke', location:'NJ', age:28, gender:'m'},
        {account_id:2,name: 'Laia', location:'NY', age:38, gender:'f'},
@@ -60,25 +56,31 @@ comments = Comment.create([
        ])
 
  votes = Vote.create([
-   {vote: "up",user_id:1,regulation_id:3},
-   {vote: "down",user_id:2,regulation_id:1},
-   {vote: "up",user_id:3,regulation_id:2},
-   {vote: "down",user_id:4,regulation_id:1},
-   {vote: "up",user_id:5,regulation_id:2},
-   {vote: "up",user_id:6,regulation_id:4},
-   {vote: "up",user_id:7,regulation_id:5},
-   {vote: "up",user_id:8,regulation_id:5},
-   {vote: "up",user_id:9,regulation_id:5},
-   {vote: "up",user_id:10,regulation_id:5},
-   {vote: "up",user_id:11,regulation_id:5},
-   {vote: "up",user_id:12,regulation_id:2},
-   {vote: "up",user_id:13,regulation_id:5},
-   {vote: "up",user_id:14,regulation_id:5},
-   {vote: "up",user_id:15,regulation_id:1},
-   {vote: "up",user_id:16,regulation_id:5},
-   {vote: "up",user_id:17,regulation_id:3},
-   {vote: "up",user_id:18,regulation_id:3},
-   {vote: "up",user_id:19,regulation_id:2}
+
+    {vote: "down",user_id:2,regulation_id:1},
+    {vote: "down",user_id:5,regulation_id:1},
+    {vote: "up",user_id:15,regulation_id:1},
+    {vote: "down",user_id:4,regulation_id:1},
+    {vote: "up",user_id:8,regulation_id:1},
+    {vote: "up",user_id:3,regulation_id:2},
+    {vote: "up",user_id:5,regulation_id:2},
+    {vote: "up",user_id:19,regulation_id:2},
+    {vote: "up",user_id:1,regulation_id:3},
+    {vote: "up",user_id:2,regulation_id:3},
+    {vote: "up",user_id:17,regulation_id:3},
+    {vote: "up",user_id:18,regulation_id:3},
+    {vote: "up",user_id:6,regulation_id:4},
+    {vote: "up",user_id:1,regulation_id:4},
+    {vote: "up",user_id:3,regulation_id:4},
+    {vote: "up",user_id:7,regulation_id:4},
+    {vote: "up",user_id:9,regulation_id:5},
+    {vote: "up",user_id:10,regulation_id:5},
+    {vote: "up",user_id:11,regulation_id:5},
+    {vote: "up",user_id:12,regulation_id:2},
+    {vote: "up",user_id:13,regulation_id:5},
+    {vote: "up",user_id:14,regulation_id:5},
+    {vote: "up",user_id:16,regulation_id:5},
+
 ])
 
   categories = Category.create([
