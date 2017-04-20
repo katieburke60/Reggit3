@@ -59,10 +59,12 @@ class RegulationsController < ApplicationController
       if current_regulation
         current_regulation
       else
-        Regulation.create(title: regulation['title'], agency: regulation['agencies'][0]['name'], reg_status: regulation['type'],
+        Regulation.create(
+                          title: regulation['title'], agency: regulation['agencies'][0]['name'], reg_status: regulation['type'],
                           document_number: regulation['document_number'], url: regulation['html_url'],
                           publication_date: regulation['publication_date'], agency_id: regulation['agencies'][0]['id'],
-                          summary: regulation['abstract'], major_rule: true, category_name: @found_category, category_id: category_id)
+                          summary: regulation['abstract'], major_rule: true, category_name: @found_category, category_id: category_id,
+                          )
       end
   end
   render json: @final_regulations_list.to_json
