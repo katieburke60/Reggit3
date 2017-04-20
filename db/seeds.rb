@@ -43,7 +43,7 @@ comments = Comment.create([
   ])
 
   regulations = Regulation.create([
-    { major_rule: true, title: 'water regulation' }
+    { major_rule: true, title: 'water regulation', url: 'www.kryanburke.net' }
     ])
 
   citizens = Citizen.create([

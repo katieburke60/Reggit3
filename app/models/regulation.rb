@@ -6,5 +6,6 @@ class Regulation < ApplicationRecord
   has_many :citizens, through: :comments
   has_many :citizens, through: :votes
   belongs_to :category
+  has_one :regulation_body
 
 end
