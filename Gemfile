@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 5.0.2'
-
+gem 'rack-cors', :require => 'rack/cors'
 gem 'spring', :group => :development
 gem 'pg'
 # To use ActiveModel has_secure_password
