@@ -45,7 +45,6 @@ class RegulationsController < ApplicationController
 
         regulations_list_data = JSON.parse(RestClient.get(dynamic_date_url),headers={})
         regulations_list_v1 = regulations_list_data['results']
-
         @final_regulations_list = regulations_list_v1.map do |regulation|
           @@cat_to_agency_id.each do |category, agencies|
             if agencies.include?(regulation['agencies'][0]['id'])
@@ -66,7 +65,7 @@ class RegulationsController < ApplicationController
           summary: regulation['abstract'], major_rule: true, category_name: category.name, category_id: category.id,
           )
         end
-        render json: final_regulations_list.to_json
+        render json: final_regulations_list.uniq.to_json
       end
 
       def show
