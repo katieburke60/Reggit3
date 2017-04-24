@@ -1,5 +1,5 @@
 class Regulation < ApplicationRecord
-  validates :url, :presence => true, :uniqueness => true
+  validates :url, :presence => true
 
   has_many :comments
   has_many :votes
