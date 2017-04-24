@@ -80,21 +80,19 @@ comments = Comment.create([
     {vote: "up",user_id:13,regulation_id:5},
     {vote: "up",user_id:14,regulation_id:5},
     {vote: "up",user_id:16,regulation_id:5},
-
 ])
-
-  categories = Category.create([
-      { name: 'education'},
-      { name: 'health'},
-      { name: 'transportation'},
-      { name: 'jobs_and_economy'},
-      { name: 'labor'},
-      { name: 'national_security'},
-      { name: 'energy_and_environment'},
-      { name: 'veterans'},
-      { name: 'finance'},
-      { name: 'housing_and_urban_development'},
-      { name: 'foreign_policy'},
-      { name: 'law_and_justice'},
-      { name: 'technology'},
-    ])
+categories = Category.create ([
+  {name: "education"},
+  {name: "health"},
+  {name: "transportation"},
+  {name: "jobs"},
+  {name: "labor"},
+  {name: "security"},
+  {name: "energy"},
+  {name: "veterans"},
+  {name: "finance"},
+  {name: "housing"},
+  {name: "foreign_policy"},
+  {name: "law_and_justice"},
+  {name: "technology"},
+])
