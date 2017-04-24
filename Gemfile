@@ -30,3 +30,5 @@ gem 'listen', '~> 3.0' #NOTE: for TCP functionality, use '~> 2.10' for now
 # group :test, :development do
 #   gem 'ruby-debug19', :require => 'ruby-debug'
 # end
+
+gem 'pry-rails'
