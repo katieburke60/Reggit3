@@ -4,8 +4,8 @@ Rails.application.routes.draw do
  resources :accounts, only: [:index]
  resources :categories, only: [:index]
  resources :citizens, only: [:index, :show]
- resources :votes, only: [:index, :show]
- resources :comments, only: [:index]
+ resources :votes, only: [:show, :create]
+ resources :comments, only: [:create]
  resources :regulations, only: [:index, :show]
  resources :apicall, only: [:index]
 
