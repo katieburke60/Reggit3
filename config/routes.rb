@@ -5,7 +5,7 @@ Rails.application.routes.draw do
  resources :categories, only: [:index]
  resources :citizens, only: [:index, :show]
  resources :votes, only: [:show, :create]
- resources :comments, only: [:create]
+ resources :comments, only: [:show, :create]
  resources :regulations, only: [:index, :show]
  resources :apicall, only: [:index]
 
