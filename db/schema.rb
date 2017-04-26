@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20170419195524) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["email"], name: "index_accounts_on_email", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -41,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170419195524) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "description"
-    t.integer  "user_id"
+    t.integer  "citizen_id"
     t.integer  "regulation_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
