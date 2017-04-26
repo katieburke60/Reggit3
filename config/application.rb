@@ -26,5 +26,7 @@ module Reggit2
                resource '*', :headers => :any, :methods => [:get, :post, :options]
              end
            end
-end   
+
+           config.autoload_paths << Rails.root.join('lib')
+         end
 end
