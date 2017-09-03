@@ -34,10 +34,11 @@ class RegulationsController < ApplicationController
       }
 
       def get_regulations
-        fullurl= 'www.federalregister.gov/api/v1/documents.json?per_page=1000&order=relevance&conditions%5Bpublication_date%5D%5Bgte%5D=2017-01-01&conditions%5Btype%5D%5B%5D=PRORULE&conditions%5Btype%5D%5B%5D=NOTICE&conditions%5Bsignificant%5D=1'
+        fullurl= 'https://api.data.gov/regulations/v3/documents.json?api_key=' + Rails.application.secrets.data_gov_key '&dct=' + dockets + '&crd=' retro_date + Date.today
+        dockets='PR+FR+N'
         fedurl= 'www.federalregister.gov/api/v1/documents.json?per_page=1000&order=relevance&conditions'
-        retro_date= (Date.today - 4.months).to_s
-        dynamic_date_url = 'www.federalregister.gov/api/v1/documents.json?per_page=1000&order=relevance&conditions' + '%5Bpublication_date%5D%5Bgte%5D=' + ((Date.today - 4.months).to_s) + '&conditions%5Btype%5D%5B%5D=PRORULE&conditions%5Btype%5D%5B%5D=NOTICE&conditions%5Bsignificant%5D=1'
+        retro_date= (Date.today - 12.months).to_s
+        # dynamic_date_url = 'www.federalregister.gov/api/v1/documents.json?per_page=1000&order=relevance&conditions' + '%5Bpublication_date%5D%5Bgte%5D=' + ((Date.today - 4.months).to_s) + '&conditions%5Btype%5D%5B%5D=PRORULE&conditions%5Btype%5D%5B%5D=NOTICE&conditions%5Bsignificant%5D=1'
 
         regulations_list_data = JSON.parse(RestClient.get(dynamic_date_url),headers={})
         regulations_list_v1 = regulations_list_data['results']
@@ -58,7 +59,7 @@ class RegulationsController < ApplicationController
           title: regulation['title'], agency: regulation['agencies'][0]['name'], reg_status: regulation['type'],
           document_number: regulation['document_number'], url: regulation['html_url'],
           publication_date: regulation['publication_date'], agency_id: regulation['agencies'][0]['id'],
-          summary: regulation['abstract'], major_rule: true, category_name: category.name, category_id: category.id,
+          summary: regulation['abstract'], category_name: category.name, category_id: category.id,
           )
         end
         render json: final_regulations_list.uniq.to_json

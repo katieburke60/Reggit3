@@ -6,7 +6,7 @@ Rails.application.routes.draw do
  resources :comments, only: [:create]
  resources :regulations, only: [:index, :show]
  resources :sessions, only: [:create]
- resources :registration, only: [:create]
+ resources :registrations, only: [:create]
  resources :categories, only: [:index]
 
 end

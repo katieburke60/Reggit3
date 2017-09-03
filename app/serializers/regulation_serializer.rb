@@ -1,5 +1,5 @@
 class RegulationSerializer < ActiveModel::Serializer
-  attributes :id, :category_name, :category_id, :title, :summary, :reg_status, :publication_date
+  attributes :id, :category_name, :category_id, :title, :summary, :reg_status, :publication_date, :major_rule
   has_many :votes
   has_many :comments
   has_one :regulation_body
