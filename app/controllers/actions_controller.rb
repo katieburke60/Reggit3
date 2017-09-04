@@ -2,7 +2,7 @@ require 'rest-client'
 require 'pry'
 require 'nokogiri'
 
-class RegulationsController < ApplicationController
+class ActionsController < ApplicationController
   # @@cat_to_agency_id = {
   #   :education => [126],
   #   :health => [221, 45, 353],
@@ -35,19 +35,19 @@ class RegulationsController < ApplicationController
     :other => ['GEO', 'USPS', 'CNCS', 'OPM']
       }
 
-      def get_regulations
+      def get_actions
         fullurl = 'https://api.data.gov/regulations/v3/documents.json?api_key=' + Rails.application.secrets.data_gov_key + '&dct=PR+FR&crd=07/01/16-08/01/16&rpp=500'
         # dockets='PR+FR+N'
         # ${retro_date}-${Date.today}
-        fedurl= 'www.federalregister.gov/api/v1/documents.json?per_page=1000&order=relevance&conditions'
+
         retro_date= (Date.today - 12.months).to_s
         # dynamic_date_url = 'www.federalregister.gov/api/v1/documents.json?per_page=1000&order=relevance&conditions' + '%5Bpublication_date%5D%5Bgte%5D=' + ((Date.today - 4.months).to_s) + '&conditions%5Btype%5D%5B%5D=PRORULE&conditions%5Btype%5D%5B%5D=NOTICE&conditions%5Bsignificant%5D=1'
 
-        regulations_list_data = JSON.parse(RestClient.get(fullurl),headers={})
-        regulations_list_v1 = regulations_list_data['documents']
-        @final_regulations_list = regulations_list_v1.map do |regulation|
+        actions_list_data = JSON.parse(RestClient.get(fullurl),headers={})
+        actions_list_v1 = actions_list_data['documents']
+        @initial_reg_list = actions_list_v1.map do |action|
           @@cat_to_agency_name.each do |category, agencies|
-            if agencies.include?(regulation['agencyAcronym'])
+            if agencies.include?(action['agencyAcronym'])
               @found_category = category
             end
           end
@@ -56,34 +56,44 @@ class RegulationsController < ApplicationController
           if !category
             category = Category.where(["name= ?", 'other']).first
           end
-          yield(regulation, category)
+          yield(action, category)
         end
       end
       def index
-        final_regulations_list = get_regulations do |regulation, category|
+        initial_reg_list = get_actions do |action, category|
           if category
-            Regulation.where(title: regulation['title']).first_or_create(
-            title: regulation['title'], agency: regulation['agencyAcronym'], status: regulation['documentType'],
-            document_number: regulation['documentId'],
-            publication_date: regulation['postedDate'], fedregister_id: regulation['frNumber'], docket_id: regulation['docketId'], open_for_comment: regulation['openForComment'], comments_received: regulation['numberOfCommentsReceived'], comment_end_date: regulation['commentDueDate'], comment_start_date: regulation['commentStartDate'], attachment_number: regulation['attachmentCount'], category_name: category.name, category_id: category.id)
+            Action.where(title: action['title']).first_or_create(
+            title: action['title'], agency_acronym: action['agencyAcronym'], status: action['documentType'],
+            document_number: action['documentId'],
+            publication_date: action['postedDate'], fedregister_id: action['frNumber'], docket_id: action['docketId'], open_for_comment: action['openForComment'], comments_received: action['numberOfCommentsReceived'], comment_end_date: action['commentDueDate'], comment_start_date: action['commentStartDate'], attachment_number: action['attachmentCount'], category_name: category.name, category_id: category.id)
           else
-            Regulation.where(title: regulation['title']).first_or_create(
-            title: regulation['title'], agency: regulation['agencyAcronym'],
-            document_number: regulation['documentId'],
-            publication_date: regulation['postedDate'], fedregister_id: regulation['frNumber'], docket_id: regulation['docketId'], open_for_comment: regulation['openForComment'], comments_received: regulation['numberOfCommentsReceived'], comment_end_date: regulation['commentDueDate'], comment_start_date: regulation['commentStartDate'], attachment_number: regulation['attachmentCount'])
+            Action.where(title: action['title']).first_or_create(
+            title: action['title'], agency_acronym: action['agencyAcronym'],
+            document_number: action['documentId'],
+            publication_date: action['postedDate'], fedregister_id: action['frNumber'], docket_id: action['docketId'], open_for_comment: action['openForComment'], comments_received: action['numberOfCommentsReceived'], comment_end_date: action['commentDueDate'], comment_start_date: action['commentStartDate'], attachment_number: action['attachmentCount'])
           end
         end
 
+        initial_reg_list.each do |action|
+          url = 'https://www.federalregister.gov/api/v1/documents/2015-33036.json'
+          json = JSON.parse(RestClient.get(url).body)
+
+          action['agency_full'] = json['agencies'][0]['name']
+          action['html_url'] = json['body_html_url']
+          action['corrections'] = json['corrections']
+          action['date_desc'] = json['dates']
+          action['significant'] = json['significant']
+          reguation['tags'] = json['topics']
 
 
-        # sorted_reg_list = final_regulations_list.sort_by {|regulation| regulation.agency}
-        render json: final_regulations_list.uniq.to_json
+        # sorted_reg_list = initial_reg_list.sort_by {|action| action.agency}
+        render json: initial_reg_list.uniq.to_json
       end
 
       def show
-        regulation = Regulation.find(params[:id])
+        action = Action.find(params[:id])
 
-        render json: regulation
+        render json: action
       end
 
     end

@@ -1,5 +1,5 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :description, :citizen_id, :regulation_id
+  attributes :id, :description, :citizen_id, :action_id
   belongs_to :citizen
-  belongs_to :regulation
+  belongs_to :action
 end

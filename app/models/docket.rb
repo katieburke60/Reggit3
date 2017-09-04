@@ -1,5 +1,5 @@
 class Docket < ApplicationRecord
 
-  has_many :regulations
+  has_many :actions
 
 end
