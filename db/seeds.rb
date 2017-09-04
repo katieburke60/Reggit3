@@ -83,6 +83,7 @@ comments = Comment.create([
 ])
 categories = Category.create ([
   {name: "education"},
+  {name: "not-included"},
   {name: "health"},
   {name: "transportation"},
   {name: "labor"},

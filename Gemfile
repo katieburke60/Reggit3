@@ -22,6 +22,11 @@ gem 'listen', '~> 3.0' #NOTE: for TCP functionality, use '~> 2.10' for now
 
 gem 'jwt'
 
+gem 'sprockets-rails'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

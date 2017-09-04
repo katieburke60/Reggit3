@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419195524) do
+ActiveRecord::Schema.define(version: 20170903095303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,11 @@ ActiveRecord::Schema.define(version: 20170419195524) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "dockets", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+  end
+
   create_table "followers", force: :cascade do |t|
     t.integer  "regulation_id"
     t.integer  "citizen_id"
@@ -64,19 +69,30 @@ ActiveRecord::Schema.define(version: 20170419195524) do
 
   create_table "regulations", force: :cascade do |t|
     t.string   "agency"
+    t.string   "subagency"
+    t.integer  "agency_id"
     t.integer  "category_id"
     t.boolean  "major_rule"
     t.string   "title"
     t.string   "summary"
-    t.string   "reg_status"
+    t.string   "type"
     t.string   "url"
-    t.integer  "document_number"
+    t.string   "document_number"
     t.string   "publication_date"
-    t.integer  "federal_register_id"
+    t.string   "fedregister_id"
     t.string   "category_name"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.integer  "agency_id"
+    t.string   "docket_id"
+    t.boolean  "open_for_comment"
+    t.integer  "comments_received"
+    t.string   "comment_end_date"
+    t.string   "comment_start_date"
+    t.string   "action"
+    t.integer  "attachment_number"
+    t.string   "contact"
+    t.string   "reg_body"
+    t.string   "status"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "votes", force: :cascade do |t|

@@ -3,6 +3,7 @@ class CreateRegulationBodies < ActiveRecord::Migration[5.0]
     create_table :regulation_bodies do |t|
       t.integer :regulation_id
       t.text :html_blob
+      t.string :url
 
       t.timestamps
     end
