@@ -3,7 +3,7 @@ class Action < ApplicationRecord
   has_many :comments
   has_many :votes
   has_many :followers
-  has_many :citizens, through: :followers
+  has_many :citizens, through: :action_follows
   has_many :citizens, through: :comments
   has_many :citizens, through: :votes
   belongs_to :category

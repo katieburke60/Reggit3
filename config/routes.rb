@@ -8,5 +8,6 @@ Rails.application.routes.draw do
  resources :sessions, only: [:create]
  resources :registrations, only: [:create]
  resources :categories, only: [:index]
+ resources :action_follows, only: [:create, :show]
 
 end

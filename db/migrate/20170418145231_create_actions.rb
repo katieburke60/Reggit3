@@ -12,22 +12,24 @@ class CreateActions < ActiveRecord::Migration[5.0]
       t.string :category_name
       t.string :status
       t.boolean :significant
+      t.string :priority_category
       t.string :action
       t.string :action_body
-      t.string :publication_date
+      t.date :publication_date
       t.string :document_number
       t.string :fedregister_id
       t.string :reg_id
       t.string :docket_id
       t.boolean :open_for_comment
       t.integer :comments_received
-      t.string :comment_end_date
-      t.string :comment_start_date
+      t.date :comment_end_date
+      t.date :comment_start_date
       t.integer :attachment_number
       t.string :contact
       t.string :tags
       t.string :corrections
       t.string :date_desc
+      t.integer :days_left
       t.string :html_url
 
       t.timestamps

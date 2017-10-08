@@ -35,8 +35,12 @@ class ActionsController < ApplicationController
     :other => ['GEO', 'USPS', 'CNCS', 'OPM']
       }
 
+      def days_left(comment_end_date)
+        (comment_end_date - Date.today).to_i
+      end
+
       def get_actions
-        fullurl = 'https://api.data.gov/regulations/v3/documents.json?api_key=' + Rails.application.secrets.data_gov_key + '&dct=PR+FR&crd=07/01/16-08/01/16&rpp=500'
+        fullurl = 'https://api.data.gov/regulations/v3/documents.json?api_key=' + Rails.application.secrets.data_gov_key + '&dct=PR+FR&crd=07/05/16-07/08/16&rpp=500'
         # dockets='PR+FR+N'
         # ${retro_date}-${Date.today}
 
@@ -60,7 +64,7 @@ class ActionsController < ApplicationController
         end
       end
       def index
-        initial_reg_list = get_actions do |action, category|
+        initial_action_list = get_actions do |action, category|
           if category
             Action.where(title: action['title']).first_or_create(
             title: action['title'], agency_acronym: action['agencyAcronym'], status: action['documentType'],
@@ -74,20 +78,36 @@ class ActionsController < ApplicationController
           end
         end
 
-        initial_reg_list.each do |action|
-          url = 'https://www.federalregister.gov/api/v1/documents/2015-33036.json'
-          json = JSON.parse(RestClient.get(url).body)
+        initial_action_list.map do |action|
+          if action.comment_end_date
+            action.update_attribute(:days_left, (action.comment_end_date - Date.today))
+          end
 
-          action['agency_full'] = json['agencies'][0]['name']
-          action['html_url'] = json['body_html_url']
-          action['corrections'] = json['corrections']
-          action['date_desc'] = json['dates']
-          action['significant'] = json['significant']
-          reguation['tags'] = json['topics']
+          if !action.agency_full
+            begin
+              id = action.fedregister_id
+              url = 'https://www.federalregister.gov/api/v1/documents/' + id + '.json'
+            rescue
+              next
+            else
+              json = JSON.parse(RestClient.get(url).body)
 
+              action['agency_full'] = json['agencies'][0]['name']
+              action['html_url'] = json['body_html_url']
+              action['corrections'] = json['corrections']
+              action['date_desc'] = json['dates']
+              action['significant'] = json['significant']
+              action['tags'] = json['topics']
+              # action['priority_category'] = json['regulation_id_number_info'].values[0]['priority_category']
+              action['reg_id'] = json['regulation_id_numbers'][0]
 
+              action.save
+            end
+          end
+        end
+            #TODO: account for possibility of multiple regulatory id numbers(the return value is an array)
         # sorted_reg_list = initial_reg_list.sort_by {|action| action.agency}
-        render json: initial_reg_list.uniq.to_json
+        render json: initial_action_list.uniq.to_json
       end
 
       def show
