@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008151802) do
+ActiveRecord::Schema.define(version: 20180418145519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20171008151802) do
   end
 
   create_table "actionFollows", force: :cascade do |t|
+    t.boolean  "following"
     t.integer  "action_id"
     t.integer  "citizen_id"
     t.datetime "created_at", null: false
@@ -38,39 +39,51 @@ ActiveRecord::Schema.define(version: 20171008151802) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "action_follows", force: :cascade do |t|
+    t.boolean "following"
+    t.integer "citizen_id"
+    t.integer "action_id"
+  end
+
   create_table "actions", force: :cascade do |t|
     t.string   "title"
     t.string   "summary"
-    t.string   "type"
+    t.string   "desc"
     t.string   "agency_acronym"
     t.string   "agency_full"
     t.integer  "agency_id"
     t.string   "subagency"
+    t.integer  "subagency_id"
     t.integer  "category_id"
     t.string   "category_name"
     t.string   "status"
+    t.date     "effective_date"
     t.boolean  "significant"
     t.string   "priority_category"
     t.string   "action"
     t.string   "action_body"
     t.date     "publication_date"
     t.string   "document_number"
+    t.string   "regulation_title"
     t.string   "fedregister_id"
-    t.string   "reg_id"
+    t.string   "cfr"
+    t.string   "rin"
     t.string   "docket_id"
     t.boolean  "open_for_comment"
     t.integer  "comments_received"
     t.date     "comment_end_date"
     t.date     "comment_start_date"
-    t.integer  "attachment_number"
+    t.string   "comments_url"
+    t.integer  "supporting_docs_number"
     t.string   "contact"
     t.string   "tags"
     t.string   "corrections"
     t.string   "date_desc"
     t.integer  "days_left"
+    t.integer  "start_page"
     t.string   "html_url"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "cat_follows", force: :cascade do |t|

@@ -1,4 +1,4 @@
 class ActionFollow < ApplicationRecord
   belongs_to :action
-  belongs_to  :citizen
+  belongs_to :citizen
 end
