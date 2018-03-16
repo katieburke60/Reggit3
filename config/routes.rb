@@ -2,9 +2,10 @@
 Rails.application.routes.draw do
  # root to: ‘regulations#index’
  # resources :accounts, only: [:index]
- resources :votes, only: [:show, :create]
- resources :comments, only: [:create]
- resources :actions, only: [:index, :show]
+ resources :actions, only: [:index, :show] do
+   resources :votes, only: [:show, :create, :index]
+   resources :comments, only: [:create]
+ end
  resources :sessions, only: [:create]
  resources :citizens, only: [:index]
  resources :registrations, only: [:create]

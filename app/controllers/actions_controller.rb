@@ -140,7 +140,6 @@ class ActionsController < ApplicationController
         action = Action.find(params['action_id'])
         action_follow = ActionFollow.find_by(action_id: action.id, citizen_id: account.citizen.id)
         action_follow.destroy
-        binding.pry
         render json: action_follow
       end
 

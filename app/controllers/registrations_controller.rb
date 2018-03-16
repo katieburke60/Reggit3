@@ -1,4 +1,4 @@
-class RegistrationsController < ApplicationController
+  class RegistrationsController < ApplicationController
   skip_before_action :authenticate
 
   def create

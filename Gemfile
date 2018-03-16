@@ -22,6 +22,8 @@ gem 'listen', '~> 3.0' #NOTE: for TCP functionality, use '~> 2.10' for now
 
 gem 'jwt'
 
+gem 'thin'
+
 gem 'sprockets-rails'
 gem 'sass-rails'
 gem 'uglifier'

@@ -18,7 +18,6 @@ class ActionFollowsController < ApplicationController
       Account.from_token(token)
     end)
     citizen = account.citizen
-    binding.pry
     actionFollow = Action.find(params['action_id']).actionFollow.where("citizen_id = '#{citizen.id}'")
     if account && actionFollow
       !actionFollow.following
